@@ -12421,6 +12421,7 @@ _parcelHelpers.defineInteropFlag(exports);
 var _urlImgIconsSvg = require('url:../../img/icons.svg');
 var _urlImgIconsSvgDefault = _parcelHelpers.interopDefault(_urlImgIconsSvg);
 var _fractional = require('fractional');
+var _fractionalDefault = _parcelHelpers.interopDefault(_fractional);
 function _defineProperty(obj, key, value) {
   if ((key in obj)) {
     Object.defineProperty(obj, key, {
@@ -12471,14 +12472,13 @@ function _classApplyDescriptorSet(receiver, descriptor, value) {
     descriptor.value = value;
   }
 }
+console.log(_fractionalDefault.default);
 var _parentElement = new WeakMap();
 var _data = new WeakMap();
 var _clear = new WeakSet();
 var _generateMarkup = new WeakSet();
-var _generateMarkupIngredient = new WeakSet();
 class RecipeView {
   constructor() {
-    _generateMarkupIngredient.add(this);
     _generateMarkup.add(this);
     _clear.add(this);
     _parentElement.set(this, {
@@ -12564,7 +12564,19 @@ function _generateMarkup2() {
           <h2 class="heading--2">Recipe ingredients</h2>
           <ul class="recipe__ingredient-list">
           
-          ${_classPrivateFieldGet(this, _data).ingredients.map(_classPrivateMethodGet(this, _generateMarkupIngredient, _generateMarkupIngredient2)).join('')}
+          ${_classPrivateFieldGet(this, _data).ingredients.map(ing => {
+    return `
+            <li class="recipe__ingredient">
+              <svg class="recipe__icon">
+                <use href="${_urlImgIconsSvgDefault.default}#icon-check"></use>
+              </svg>
+              <div class="recipe__quantity">${ing.quantity}</div>
+              <div class="recipe__description">
+                <span class="recipe__unit">${ing.unit}</span>
+                ${ing.description}
+              </div>
+            </li>`;
+  }).join('')}
         
           </ul>
         </div>
@@ -12588,23 +12600,10 @@ function _generateMarkup2() {
           </a>
         </div>`;
 }
-function _generateMarkupIngredient2(ing) {
-  return `
-  <li class="recipe__ingredient">
-    <svg class="recipe__icon">
-      <use href="${_urlImgIconsSvgDefault.default}#icon-check"></use>
-    </svg>
-    <div class="recipe__quantity">${ing.quantity ? new _fractional.Fraction(ing.quantity).toString() : ''}</div>
-    <div class="recipe__description">
-      <span class="recipe__unit">${ing.unit}</span>
-      ${ing.description}
-    </div>
-  </li>`;
-}
 exports.default = new RecipeView();
 
 },{"url:../../img/icons.svg":"3t5dV","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","fractional":"5jzJt"}],"3t5dV":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "icons.d4a14980.svg"
+module.exports = require('./bundle-url').getBundleURL() + "icons.HASH_REF_f6727c52d326b6f99dffa0b9d4a14980.svg"
 },{"./bundle-url":"3seVR"}],"3seVR":[function(require,module,exports) {
 "use strict";
 
@@ -13022,4 +13021,4 @@ module.exports.Fraction = Fraction
 
 },{}]},["7BONy","3miIZ"], "3miIZ", "parcelRequirefade")
 
-//# sourceMappingURL=index.250b04c7.js.map
+//# sourceMappingURL=index.HASH_REF_6315ebf922a29661e8263da0250b04c7.js.map

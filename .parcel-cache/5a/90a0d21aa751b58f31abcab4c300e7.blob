@@ -471,7 +471,7 @@ const controlRecipes = async function () {
     // STEP 2 Rendering recipe
     _viewsRecipeViewJsDefault.default.render(_modelJs.state.recipe);
   } catch (err) {
-    _viewsRecipeViewJsDefault.default.renderError();
+    _viewsRecipeViewJsDefault.default.renderError(`${err} ⚡⚡⚡`);
   }
 };
 // publisher-subscriber pattern
@@ -12502,7 +12502,6 @@ function _classApplyDescriptorSet(receiver, descriptor, value) {
 var _parentElement = new WeakMap();
 var _data = new WeakMap();
 var _errorMessage = new WeakMap();
-var _message = new WeakMap();
 var _clear = new WeakSet();
 var _generateMarkup = new WeakSet();
 var _generateMarkupIngredient = new WeakSet();
@@ -12523,10 +12522,6 @@ class RecipeView {
       writable: true,
       value: 'We could not find that recipe. Pleasee, try another one!'
     });
-    _message.set(this, {
-      writable: true,
-      value: ''
-    });
   }
   render(data) {
     _classPrivateFieldSet(this, _data, data);
@@ -12544,26 +12539,12 @@ class RecipeView {
     _classPrivateMethodGet(this, _clear, _clear2);
     _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
   }
-  renderError(message = _classPrivateFieldGet(this, _errorMessage)) {
+  renderError(message) {
     const markup = `
     <div class="error">
       <div>
         <svg>
           <use href="${_urlImgIconsSvgDefault.default}#icon-alert-triangle"></use>
-        </svg>
-      </div>
-        <p>${message}</p>
-    </div>
-    `;
-    _classPrivateMethodGet(this, _clear, _clear2);
-    _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
-  }
-  renderMessage(message = _classPrivateFieldGet(this, _message)) {
-    const markup = `
-    <div class="message">
-      <div>
-        <svg>
-          <use href="${_urlImgIconsSvgDefault.default}#icon-smile"></use>
         </svg>
       </div>
         <p>${message}</p>
@@ -12675,7 +12656,7 @@ function _generateMarkupIngredient2(ing) {
 exports.default = new RecipeView();
 
 },{"url:../../img/icons.svg":"3t5dV","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","fractional":"5jzJt"}],"3t5dV":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "icons.d4a14980.svg"
+module.exports = require('./bundle-url').getBundleURL() + "icons.HASH_REF_f6727c52d326b6f99dffa0b9d4a14980.svg"
 },{"./bundle-url":"3seVR"}],"3seVR":[function(require,module,exports) {
 "use strict";
 
@@ -13093,4 +13074,4 @@ module.exports.Fraction = Fraction
 
 },{}]},["7BONy","3miIZ"], "3miIZ", "parcelRequirefade")
 
-//# sourceMappingURL=index.250b04c7.js.map
+//# sourceMappingURL=index.HASH_REF_6315ebf922a29661e8263da0250b04c7.js.map

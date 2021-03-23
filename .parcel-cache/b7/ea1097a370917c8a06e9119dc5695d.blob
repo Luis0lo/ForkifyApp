@@ -471,14 +471,12 @@ const controlRecipes = async function () {
     // STEP 2 Rendering recipe
     _viewsRecipeViewJsDefault.default.render(_modelJs.state.recipe);
   } catch (err) {
-    console.log(err);
+    alert(err);
   }
 };
-// publisher-subscriber pattern
-const init = function () {
-  _viewsRecipeViewJsDefault.default.addHandlerRender(controlRecipes);
-};
-init();
+// controlRecipes();
+// >> minimize code with array containing the events and then looping over
+['hashchange', 'load'].forEach(event => window.addEventListener(event, controlRecipes));
 
 },{"@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","core-js/stable":"1PFvP","regenerator-runtime/runtime":"62Qib","./model.js":"1hp6y","./views/recipeView.js":"9e6b9"}],"5gA8y":[function(require,module,exports) {
 "use strict";
@@ -12548,7 +12546,7 @@ class RecipeView {
   }
   // publisher method needs to get access to the subscriber >>handler function
   addHandlerRender(handler) {
-    // >> minimize code with an array containing the events and then looping over
+    // >> minimize code with array containing the events and then looping over
     ['hashchange', 'load'].forEach(event => window.addEventListener(event, handler));
   }
 }
@@ -12649,7 +12647,7 @@ function _generateMarkupIngredient2(ing) {
 exports.default = new RecipeView();
 
 },{"url:../../img/icons.svg":"3t5dV","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","fractional":"5jzJt"}],"3t5dV":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "icons.d4a14980.svg"
+module.exports = require('./bundle-url').getBundleURL() + "icons.HASH_REF_f6727c52d326b6f99dffa0b9d4a14980.svg"
 },{"./bundle-url":"3seVR"}],"3seVR":[function(require,module,exports) {
 "use strict";
 
@@ -13067,4 +13065,4 @@ module.exports.Fraction = Fraction
 
 },{}]},["7BONy","3miIZ"], "3miIZ", "parcelRequirefade")
 
-//# sourceMappingURL=index.250b04c7.js.map
+//# sourceMappingURL=index.HASH_REF_6315ebf922a29661e8263da0250b04c7.js.map

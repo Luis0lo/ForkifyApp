@@ -27,6 +27,16 @@ class RecipeView {
     this.#parentElement.insertAdjacentHTML('afterbegin', markup);
   };
 
+  //publisher method needs to get access to the subscriber >>handler function
+  addHandlerRender(handler) {
+    //>> minimize code with an array containing the events and then looping over
+    ['hashchange', 'load'].forEach(event =>
+      window.addEventListener(event, handler)
+    );
+    // window.addEventListener('hashchange', handler);
+    // window.addEventListener('load', handler);
+  }
+
   #generateMarkup() {
     return `
     <figure class="recipe__fig">

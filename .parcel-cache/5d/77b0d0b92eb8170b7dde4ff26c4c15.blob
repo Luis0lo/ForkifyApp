@@ -1,0 +1,24 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _view = require('./view');
+var _viewDefault = _parcelHelpers.interopDefault(_view);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+class resultView extends _viewDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentEl", document.querySelector('.results'));
+  }
+}
+exports.default = new ResultsView();

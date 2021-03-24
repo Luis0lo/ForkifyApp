@@ -33,6 +33,7 @@ const controlRecipes = async function () {
 
     //STEP 1 loading recipe
     await model.loadRecipe(id);
+
     //STEP 2 Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
@@ -43,13 +44,17 @@ const controlRecipes = async function () {
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
+
     //1) get search query
     const query = searchView.getQuery();
     if (!query) return;
+
     //2) load search results
     await model.loadSearchResults(query);
+
     //3) render results
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);
+    resultsView.render(model.getSearchResultPage(1));
   } catch (err) {
     console.log(err);
   }

@@ -493,7 +493,7 @@ const controlSearchResults = async function () {
     await _modelJs.loadSearchResults(query);
     // 3) render results
     // resultsView.render(model.state.search.results);
-    _viewsResultsViewJsDefault.default.render(_modelJs.getSearchResultPage(1));
+    _viewsResultsViewJsDefault.default.render(_modelJs.getSearchResultPage());
     // 4) render initial pagination buttons
     _viewsPaginationViewJsDefault.default.render(_modelJs.state.search);
   } catch (err) {
@@ -12652,7 +12652,7 @@ class RecipeView extends _viewJsDefault.default {
 exports.default = new RecipeView();
 
 },{"url:../../img/icons.svg":"3t5dV","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","fractional":"5jzJt","./view.js":"2fT4v"}],"3t5dV":[function(require,module,exports) {
-module.exports = require('./bundle-url').getBundleURL() + "icons.d4a14980.svg"
+module.exports = require('./bundle-url').getBundleURL() + "icons.HASH_REF_f6727c52d326b6f99dffa0b9d4a14980.svg"
 },{"./bundle-url":"3seVR"}],"3seVR":[function(require,module,exports) {
 "use strict";
 
@@ -13231,8 +13231,7 @@ var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require('./view.js');
 var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
-var _urlImgIconsSvg = require('url:../../img/icons.svg');
-var _urlImgIconsSvgDefault = _parcelHelpers.interopDefault(_urlImgIconsSvg);
+require('url:../../img/icons.svg');
 function _defineProperty(obj, key, value) {
   if ((key in obj)) {
     Object.defineProperty(obj, key, {
@@ -13253,50 +13252,11 @@ class PaginationView extends _viewJsDefault.default {
     _defineProperty(this, "_parentElement", document.querySelector('.pagination'));
   }
   _generateMarkup() {
-    const currPage = this._data.page;
-    const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
-    // Page 1, and there are other pages
-    if (currPage === 1 && numPages > 1) {
-      return `
-        <button class="btn--inline pagination__btn--next">
-            <span>Page ${currPage + 1}</span>
-            <svg class="search__icon">
-              <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-right"></use>
-            </svg>
-        </button>`;
-    }
-    // last page
-    if (currPage === numPages && numPages > 1) {
-      return `
-        <button class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-                <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${currPage - 1}</span>
-        </button>`;
-    }
-    // other page
-    if (currPage < numPages) {
-      return `
-        <button class="btn--inline pagination__btn--next">
-            <span>Page ${currPage + 1}</span>
-            <svg class="search__icon">
-                <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-right"></use>
-            </svg>
-        </button>
-        <button class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-                <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${currPage - 1}</span>
-        </button>`;
-    }
-    // Page 1 withouut more pages
-    return '';
+    const numPages = this._data.results / this._data.resultsPerPage;
   }
 }
 exports.default = new PaginationView();
 
 },{"./view.js":"2fT4v","url:../../img/icons.svg":"3t5dV","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}]},["7BONy","3miIZ"], "3miIZ", "parcelRequirefade")
 
-//# sourceMappingURL=index.250b04c7.js.map
+//# sourceMappingURL=index.HASH_REF_6315ebf922a29661e8263da0250b04c7.js.map

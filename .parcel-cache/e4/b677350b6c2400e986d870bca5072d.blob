@@ -1,0 +1,78 @@
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require('./view.js');
+var _viewJsDefault = _parcelHelpers.interopDefault(_viewJs);
+var _urlImgIconsSvg = require('url:../../img/icons.svg');
+var _urlImgIconsSvgDefault = _parcelHelpers.interopDefault(_urlImgIconsSvg);
+function _defineProperty(obj, key, value) {
+  if ((key in obj)) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+// parcel II
+class PaginationView extends _viewJsDefault.default {
+  constructor(...args) {
+    super(...args);
+    _defineProperty(this, "_parentElement", document.querySelector('.pagination'));
+  }
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--inline');
+      console.log(btn);
+      const goToPage = btn.dataset.goto;
+      console.log(goToPage);
+      handler();
+    });
+  }
+  _generateMarkup() {
+    const currPage = this._data.page;
+    const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
+    // Page 1, and there are other pages
+    if (currPage === 1 && numPages > 1) {
+      return `
+        <button data-goto="${currPage + 1}" class="btn--inline pagination__btn--next">
+            <span>Page ${currPage + 1}</span>
+            <svg class="search__icon">
+              <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-right"></use>
+            </svg>
+        </button>`;
+    }
+    // last page
+    if (currPage === numPages && numPages > 1) {
+      return `
+        <button data-goto="${currPage - 1}" class="btn--inline pagination__btn--prev">
+            <svg class="search__icon">
+                <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-left"></use>
+            </svg>
+            <span>Page ${currPage - 1}</span>
+        </button>`;
+    }
+    // other page
+    if (currPage < numPages) {
+      return `
+        <button data-goto="${currPage + 1}" class="btn--inline pagination__btn--next">
+            <span>Page ${currPage + 1}</span>
+            <svg class="search__icon">
+                <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-right"></use>
+            </svg>
+        </button>
+        <button data-goto="${currPage - 1}" class="btn--inline pagination__btn--prev">
+            <svg class="search__icon">
+                <use href="${_urlImgIconsSvgDefault.default}#icon-arrow-left"></use>
+            </svg>
+            <span>Page ${currPage - 1}</span>
+        </button>`;
+    }
+    // Page 1 withouut more pages
+    return '';
+  }
+}
+exports.default = new PaginationView();

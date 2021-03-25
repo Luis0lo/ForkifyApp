@@ -4,6 +4,15 @@ import icons from 'url:../../img/icons.svg'; //parcel II
 class PaginationView extends View {
   _parentElement = document.querySelector('.pagination');
 
+  addHandlerClick(handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--inline');
+      if (!btn) return;
+      const goToPage = +btn.dataset.goto;
+      handler(goToPage);
+    });
+  }
+
   _generateMarkup() {
     const currPage = this._data.page;
     const numPages = Math.ceil(
@@ -12,7 +21,9 @@ class PaginationView extends View {
     // Page 1, and there are other pages
     if (currPage === 1 && numPages > 1) {
       return `
-        <button class="btn--inline pagination__btn--next">
+        <button data-goto="${
+          currPage + 1
+        }" class="btn--inline pagination__btn--next">
             <span>Page ${currPage + 1}</span>
             <svg class="search__icon">
               <use href="${icons}#icon-arrow-right"></use>
@@ -23,7 +34,9 @@ class PaginationView extends View {
     // last page
     if (currPage === numPages && numPages > 1) {
       return `
-        <button class="btn--inline pagination__btn--prev">
+        <button data-goto="${
+          currPage - 1
+        }" class="btn--inline pagination__btn--prev">
             <svg class="search__icon">
                 <use href="${icons}#icon-arrow-left"></use>
             </svg>
@@ -33,13 +46,17 @@ class PaginationView extends View {
     //other page
     if (currPage < numPages) {
       return `
-        <button class="btn--inline pagination__btn--next">
+        <button data-goto="${
+          currPage + 1
+        }" class="btn--inline pagination__btn--next">
             <span>Page ${currPage + 1}</span>
             <svg class="search__icon">
                 <use href="${icons}#icon-arrow-right"></use>
             </svg>
         </button>
-        <button class="btn--inline pagination__btn--prev">
+        <button data-goto="${
+          currPage - 1
+        }" class="btn--inline pagination__btn--prev">
             <svg class="search__icon">
                 <use href="${icons}#icon-arrow-left"></use>
             </svg>

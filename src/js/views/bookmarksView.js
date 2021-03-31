@@ -7,9 +7,9 @@ class BookmarksView extends View {
   _errorMessage = 'No bookmarks yet. Bookmark your favorite recipies first';
   _message = '';
 
-  //   addHandlerRender(handler) {
-  //     window.addEventListener('load', handler);
-  //   }
+  addHandlerRender(handler) {
+    window.addEventListener('load', handler);
+  }
 
   _generateMarkup() {
     return this._data

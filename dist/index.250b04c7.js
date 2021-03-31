@@ -479,13 +479,15 @@ const controlRecipes = async function () {
     _viewsRecipeViewJsDefault.default.renderSpinner();
     // Step 0 results view to mark selected search result
     _viewsResultsViewJsDefault.default.update(_modelJs.getSearchResultPage());
+    // STEP 1 updating bookmark view
     _viewsBookmarksViewJsDefault.default.update(_modelJs.state.bookmarks);
-    // STEP 1 loading recipe
+    // STEP 2 loading recipe
     await _modelJs.loadRecipe(id);
-    // STEP 2 Rendering recipe
+    // STEP 3 Rendering recipe
     _viewsRecipeViewJsDefault.default.render(_modelJs.state.recipe);
   } catch (err) {
     _viewsRecipeViewJsDefault.default.renderError();
+    console.error(err);
   }
 };
 const controlSearchResults = async function () {
@@ -528,7 +530,11 @@ const controlAddBookmark = function () {
   // render bookmarks
   _viewsBookmarksViewJsDefault.default.render(_modelJs.state.bookmarks);
 };
+const controlBookmarks = function () {
+  _viewsBookmarksViewJsDefault.default.render(_modelJs.state.bookmarks);
+};
 const init = function () {
+  _viewsBookmarksViewJsDefault.default.addHandlerRender(controlBookmarks);
   _viewsRecipeViewJsDefault.default.addHandlerRender(controlRecipes);
   _viewsRecipeViewJsDefault.default.addHandlerUpdateServings(controlServings);
   _viewsRecipeViewJsDefault.default.addHandlerAddBookmark(controlAddBookmark);
@@ -12529,11 +12535,16 @@ const updateServings = function (newServings) {
   });
   state.recipe.servings = newServings;
 };
+// set in localstorage
+const persistBookmarks = function () {
+  localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+};
 const addBookmark = function (recipe) {
   // add bookmark
   state.bookmarks.push(recipe);
   // mark current recipe as bookmark
   if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+  persistBookmarks();
 };
 const deleteBookmark = function (id) {
   // delete bookmark
@@ -12541,7 +12552,18 @@ const deleteBookmark = function (id) {
   state.bookmarks.splice(index, 1);
   // mark current recipe as NOT bookmark
   if (id === state.recipe.id) state.recipe.bookmarked = false;
+  persistBookmarks();
 };
+// take info from localstorage
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage);
+};
+init();
+const clearBookmarks = function () {
+  localStorage.clear('bookmarks');
+};
+clearBookmarks();
 
 },{"regenerator-runtime":"62Qib","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","./config.js":"6pr2F","./helpers.js":"581KF"}],"6pr2F":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
@@ -13459,9 +13481,9 @@ class BookmarksView extends _viewJsDefault.default {
     _defineProperty(this, "_errorMessage", 'No bookmarks yet. Bookmark your favorite recipies first');
     _defineProperty(this, "_message", '');
   }
-  // addHandlerRender(handler) {
-  // window.addEventListener('load', handler);
-  // }
+  addHandlerRender(handler) {
+    window.addEventListener('load', handler);
+  }
   _generateMarkup() {
     return this._data.map(bookmark => _previewViewJsDefault.default.render(bookmark, false)).join('');
   }
